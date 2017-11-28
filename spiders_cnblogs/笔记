@@ -1,0 +1,53 @@
+博客园文章：
+    设计字段：
+        url
+        title
+        industry
+        content
+        author
+        date_pub
+        recommand_num
+        read_num
+        common_num
+        img_path
+        tag
+        crawl_time
+
+    页面分析
+        列表页：
+            获取链接地址
+                //div[@class="post_item"]//h3/a/@href
+            获取所有文章div
+                //div[@class="post_item"]
+            获取标题
+                .//h3/a/text()
+            简介
+                .//p[@class="post_item_summary"]/text()
+            作者
+                //a[@class="lightblue"]/text()
+            发布日期 （匹配条数多，取索引）
+                //div[@class="post_item_foot"]/text()
+            推荐数
+                .//span[@class="diggnum"]/text()
+            阅读数
+                .//span[@class="article_view"]/a/text()
+            评论数
+                .//span[@class="article_comment"]/a/text()
+
+            头像链接
+                .//img[@class="pfs"]/@src
+        详情页：
+            文章内容：
+            //div[@class="post"]
+            文章标签
+            //div[@id="EntryTag"]/a/text()
+
+# 处理图片下载
+    pip install Pillow
+    IMAGES_URLS_FIELD = 'img_url'
+    IMAGES_STORE = os.path.join(base_dir,'avatar')
+    导入路径 ：scrapy.pipelines.images.ImagesPipeline
+
+# scrapy itemloader
+    提取规则统一管理，规范化
+    对提取内容处理进行封装
